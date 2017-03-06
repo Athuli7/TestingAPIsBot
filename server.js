@@ -40,7 +40,7 @@ function fry(req, res, next) {
 				"BODY"		: req.body
 			}
 			sendTelegram(
-				req.headers.host.split('.')[0],
+				req.headers.host.split(/\./g)[0],
 				JSON.stringify(
 					result,
 					null,
@@ -54,18 +54,18 @@ function fry(req, res, next) {
 	if(dsubdomain.test(req.headers.host)){
 		try{
 			var result = {};
-			if(req.headers.host.split('.')[0].indexOf('m')!=-1)		
+			if(req.headers.host.split(/\./g)[0].indexOf('m')!=-1)		
 				result["METHOD"] = req.method;
-			if(req.headers.host.split('.')[0].indexOf('p')!=-1)		
+			if(req.headers.host.split(/\./g)[0].indexOf('p')!=-1)		
 				result["PATH"] = req.getPath();
-			if(req.headers.host.split('.')[0].indexOf('h')!=-1)		
+			if(req.headers.host.split(/\./g)[0].indexOf('h')!=-1)		
 				result["HEADER"] = req.headers;
-			if(req.headers.host.split('.')[0].indexOf('q')!=-1)		
+			if(req.headers.host.split(/\./g)[0].indexOf('q')!=-1)		
 				result["QUERY"] = req.query;
-			if(req.headers.host.split('.')[0].indexOf('b')!=-1)		
+			if(req.headers.host.split(/\./g)[0].indexOf('b')!=-1)		
 				result["BODY"] = req.body;
 			sendTelegram(
-				req.headers.host.split('.')[1],
+				req.headers.host.split(/\./g)[1],
 				JSON.stringify(
 					result,
 					null,
