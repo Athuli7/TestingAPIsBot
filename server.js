@@ -30,7 +30,8 @@ function sendTelegram(chat_id, text){
 	);
 }
 function fry(req, res, next) {
-	if(req.headers.host.test(/(\d+)\.testapi\.xyz/)){
+	var subdomain = new RegExp(/(\d+)\.testapi\.xyz/);
+	if(subdomain.test(req.headers.host)){
 		try{
 			var result = {
 				"METHOD"	: req.method,
