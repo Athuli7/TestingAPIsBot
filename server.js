@@ -73,7 +73,7 @@ function fry(req, res, next) {
 		}
 	}
 	if(req.headers.host == "testapi.xyz"){
-		var chat_id = req.body.message.chat.id;
+		var chat_id = req.body.message.chat.id.toString();
 		try{
 			sendTelegram(
 				chat_id.replace(/\-/g,'n'),
