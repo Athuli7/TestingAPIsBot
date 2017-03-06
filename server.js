@@ -30,7 +30,7 @@ function sendTelegram(chat_id, text){
 	);
 }
 function fry(req, res, next) {
-	if(1){
+	if(req.headers.host.includes(/(\d+)\.testapi\.xyz/){
 		try{
 			var result = {
 				"METHOD"	: req.method,
@@ -40,8 +40,7 @@ function fry(req, res, next) {
 				"POST_VARS"	: req.body
 			}
 			sendTelegram(
-				 6984850,
-				//req.headers['x-forwarded-host'].replace(/\:.*/,'').split('.')[0],
+				req.headers.host.split('.')[0],
 				JSON.stringify(
 					result,
 					null,
@@ -51,7 +50,8 @@ function fry(req, res, next) {
 		}catch(e){
 			console.log(e);
 		}
-	}else{
+	}
+	if(req.headers.host == "testapi.xyz"){
 		try{
 			sendTelegram(
 				req.body.message.from.id,
