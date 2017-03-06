@@ -25,20 +25,20 @@ function sendTelegram(chat_id, text){
 			}
 		},
 		function (e, r, body) {
-			//console.log(req);
+			console.log(req);
 		}
 	);
 }
 function fry(req, res, next) {
-	var subdomain = new RegExp(/(\d+)\.testapi\.xyz/);
+	var subdomain = new RegExp(/(\w*)(\d+)\.testapi\.xyz/);
 	if(subdomain.test(req.headers.host)){
 		try{
 			var result = {
 				"METHOD"	: req.method,
 				"PATH"		: req.getPath(),
 				"HEADER"	: req.headers,
-				"GET_VARS" 	: req.query,
-				"POST_VARS"	: req.body
+				"QUERY" 	: req.query,
+				"BODY"		: req.body
 			}
 			sendTelegram(
 				req.headers.host.split('.')[0],
@@ -56,7 +56,16 @@ function fry(req, res, next) {
 		try{
 			sendTelegram(
 				req.body.message.from.id,
-				"Use "+req.body.message.from.id+".testapi.xyz for all requests."
+				"Format : <selector>."+req.body.message.from.id+".testapi.xyz \n"+
+				"<selector> takes the following options\n"+
+				"m => method\n"+
+				"p => path\n"+
+				"h => header\n"+
+				"q => query\n"+
+				"b => body\n"+
+				"eg. mq.5834785.testapi.xyz would provide just the method and queries\n"+
+				"defaults to \'pqb\'\n"+
+				"We\'ll have HTTPS soon"
 			);
 		}catch(e){
 			console.log(e);
