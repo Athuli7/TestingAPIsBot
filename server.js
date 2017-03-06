@@ -38,11 +38,11 @@ function fry(req, res, next) {
 				"PATH"		: req.getPath(),
 				"QUERY" 	: req.query,
 				"BODY"		: req.body
-			}*/
+			}
+			result,*/
 			sendTelegram(
 				req.headers.host.split(/\./g)[0],
 				JSON.stringify(
-					//result,
 					req.body,
 					null,
 					7
