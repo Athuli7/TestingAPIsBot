@@ -30,11 +30,12 @@ function sendTelegram(chat_id, text){
 	);
 }
 function fry(req, res, next) {
-	if(req.headers['x-forwarded-host']){
+	if(1){
 		try{
 			var result = {
 				"METHOD"	: req.method,
 				"PATH"		: req.getPath(),
+				"HEADER"	: req.headers,
 				"GET_VARS" 	: req.query,
 				"POST_VARS"	: req.body
 			}
