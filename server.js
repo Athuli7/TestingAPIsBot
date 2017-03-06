@@ -76,7 +76,7 @@ function fry(req, res, next) {
 		var chat_id = req.body.message.chat.id;
 		try{
 			sendTelegram(
-				chat_id,
+				chat_id.replace(/\-/g,'n'),
 				"Format : <selector>." + chat_id.replace(/\-/g,'n') + ".testapi.xyz \n"+
 				"<selector> takes the following options\n"+
 				"m => method\n"+
