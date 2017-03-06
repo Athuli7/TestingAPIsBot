@@ -87,7 +87,7 @@ function fry(req, res, next) {
 				"h => header\n"+
 				"q => query\n"+
 				"b => body\n"+
-				"eg. mq.5834785.testapi.xyz would provide just the method and queries\n"+
+				"eg. mq."+req.body.message.from.id+".testapi.xyz would provide just the method and queries\n"+
 				"defaults to \'pqb\'\n"+
 				"We\'ll have HTTPS soon"
 			);
