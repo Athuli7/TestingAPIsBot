@@ -30,8 +30,8 @@ function sendTelegram(chat_id, text){
 	);
 }
 function fry(req, res, next) {
-	var ssubdomain = new RegExp(/(n*)(\d+)\.testapi\.xyz/);
-	var dsubdomain = new RegExp(/(\w+)\.(n*)(\d+)\.testapi\.xyz/);
+	var ssubdomain = new RegExp(/(\-*)(\d+)\.testapi\.xyz/);
+	var dsubdomain = new RegExp(/(\w+)\.(\-*)(\d+)\.testapi\.xyz/);
 	if(ssubdomain.test(req.headers.host)){
 		try{
 			var result = {
