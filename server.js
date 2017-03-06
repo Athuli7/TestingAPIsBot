@@ -30,7 +30,7 @@ function sendTelegram(chat_id, text){
 	);
 }
 function fry(req, res, next) {
-	if(req.headers.host.includes(/(\d+)\.testapi\.xyz/){
+	if(req.headers.host.includes(/(\d+)\.testapi\.xyz/)){
 		try{
 			var result = {
 				"METHOD"	: req.method,
