@@ -1,0 +1,32 @@
+{
+  "name": "testapi",
+  "version": "0.5.0",
+  "description": "A Telegram Bot to Test API calls.",
+  "main": "server.js",
+  "dependencies": {
+    "request": "^2.80.0",
+    "restify": "^4.3.0",
+    "restify-plugins": "^1.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Athuli7/TestingAPIsBot.git"
+  },
+  "keywords": [
+    "test",
+    "api",
+    "telegram",
+    "bot"
+  ],
+  "author": "Athul Raj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Athuli7/TestingAPIsBot/issues"
+  },
+  "homepage": "https://github.com/Athuli7/TestingAPIsBot#readme"
+}
