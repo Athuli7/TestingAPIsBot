@@ -30,8 +30,8 @@ function sendTelegram(chat_id, text){
 	);
 }
 function fry(req, res, next) {
-	var ssubdomain = new RegExp(/(\-*)(\d+)\.testapi\.xyz/);
-	var dsubdomain = new RegExp(/(\w+)\.(\-*)(\d+)\.testapi\.xyz/);
+	var ssubdomain = new RegExp(/(n*)(\d+)\.testapi\.xyz/);
+	var dsubdomain = new RegExp(/(\w+)\.(n*)(\d+)\.testapi\.xyz/);
 	if(ssubdomain.test(req.headers.host)){
 		try{
 			var result = {
@@ -40,7 +40,7 @@ function fry(req, res, next) {
 				"BODY"		: req.body
 			}
 			sendTelegram(
-				req.headers.host.split(/\./g)[0].replace(/\-/g,'n'),
+				req.headers.host.split(/\./g)[0],
 				req.body
 			);
 		}catch(e){
@@ -61,7 +61,7 @@ function fry(req, res, next) {
 			if(req.headers.host.split(/\./g)[0].indexOf('b')!=-1)		
 				result["BODY"] = req.body;
 			sendTelegram(
-				req.headers.host.split(/\./g)[1].replace(/\-/g,'n'),
+				req.headers.host.split(/\./g)[1],
 				JSON.stringify(
 					result,
 					null,
