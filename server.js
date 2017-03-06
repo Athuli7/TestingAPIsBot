@@ -33,20 +33,15 @@ function fry(req, res, next) {
 	var ssubdomain = new RegExp(/(\d+)\.testapi\.xyz/);
 	var dsubdomain = new RegExp(/(\w*)\.(\d+)\.testapi\.xyz/);
 	if(ssubdomain.test(req.headers.host)){
-		try{/*
+		try{
 			var result = {
 				"PATH"		: req.getPath(),
 				"QUERY" 	: req.query,
 				"BODY"		: req.body
 			}
-			result,*/
 			sendTelegram(
 				req.headers.host.split(/\./g)[0],
-				JSON.stringify(
-					req.body,
-					null,
-					7
-				)
+				req.body
 			);
 		}catch(e){
 			console.log(e);
@@ -80,15 +75,15 @@ function fry(req, res, next) {
 	if(req.headers.host == "testapi.xyz"){
 		try{
 			sendTelegram(
-				req.body.message.from.id,
-				"Format : <selector>."+req.body.message.from.id+".testapi.xyz \n"+
+				req.body.message.chat.id,
+				"Format : <selector>."+req.body.message.chat.id+".testapi.xyz \n"+
 				"<selector> takes the following options\n"+
 				"m => method\n"+
 				"p => path\n"+
 				"h => header\n"+
 				"q => query\n"+
 				"b => body\n"+
-				"eg. mq."+req.body.message.from.id+".testapi.xyz would provide just the method and queries\n"+
+				"eg. mq."+req.body.message.chat.id+".testapi.xyz would provide just the method and queries\n"+
 				"We\'ll have HTTPS soon"
 			);
 		}catch(e){
