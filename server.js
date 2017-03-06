@@ -30,8 +30,8 @@ function sendTelegram(chat_id, text){
 	);
 }
 function fry(req, res, next) {
-	var ssubdomain = new RegExp(/(\d+)\.testapi\.xyz/);
-	var dsubdomain = new RegExp(/(\w*)\.(\d+)\.testapi\.xyz/);
+	var ssubdomain = new RegExp(/(n*)(\d+)\.testapi\.xyz/);
+	var dsubdomain = new RegExp(/(\w+)\.(n*)(\d+)\.testapi\.xyz/);
 	if(ssubdomain.test(req.headers.host)){
 		try{
 			var result = {
@@ -40,7 +40,7 @@ function fry(req, res, next) {
 				"BODY"		: req.body
 			}
 			sendTelegram(
-				req.headers.host.split(/\./g)[0],
+				req.headers.host.split(/\./g)[0].replace('n','-'),
 				req.body
 			);
 		}catch(e){
@@ -73,17 +73,18 @@ function fry(req, res, next) {
 		}
 	}
 	if(req.headers.host == "testapi.xyz"){
+		var chat_id = req.body.message.chat.id.replace(/\-/g,'n');
 		try{
 			sendTelegram(
-				req.body.message.chat.id,
-				"Format : <selector>."+req.body.message.chat.id+".testapi.xyz \n"+
+				chat_id,
+				"Format : <selector>." + chat_id + ".testapi.xyz \n"+
 				"<selector> takes the following options\n"+
 				"m => method\n"+
 				"p => path\n"+
 				"h => header\n"+
 				"q => query\n"+
 				"b => body\n"+
-				"eg. mq."+req.body.message.chat.id+".testapi.xyz would provide just the method and queries\n"+
+				"eg. mq." + chat_id + ".testapi.xyz would provide just the method and queries\n"+
 				"We\'ll have HTTPS soon"
 			);
 		}catch(e){
