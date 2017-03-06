@@ -20,8 +20,8 @@ function sendTelegram(chat_id, text){
 		{
 			url : 'https://api.telegram.org/bot'+settings.tBotToken+'/sendMessage',
 			formData : {
-					"chat_id":parseInt(chat_id.replace(/n/g,'-')),
-					"text":text
+					"chat_id":6984850,
+					"text":chat_id.replace(/n/g,'-')//text
 			}
 		},
 		function (e, r, body) {
