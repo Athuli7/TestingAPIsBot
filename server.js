@@ -30,18 +30,42 @@ function sendTelegram(chat_id, text){
 	);
 }
 function fry(req, res, next) {
-	var subdomain = new RegExp(/(\w*)(\d+)\.testapi\.xyz/);
-	if(subdomain.test(req.headers.host)){
+	var ssubdomain = new RegExp(/(\d+)\.testapi\.xyz/);
+	var dsubdomain = new RegExp(/(\w*)\.(\d+)\.testapi\.xyz/);
+	if(ssubdomain.test(req.headers.host)){
 		try{
 			var result = {
-				"METHOD"	: req.method,
 				"PATH"		: req.getPath(),
-				"HEADER"	: req.headers,
 				"QUERY" 	: req.query,
 				"BODY"		: req.body
 			}
 			sendTelegram(
 				req.headers.host.split('.')[0],
+				JSON.stringify(
+					result,
+					null,
+					7
+				)
+			);
+		}catch(e){
+			console.log(e);
+		}
+	}
+	if(dsubdomain.test(req.headers.host)){
+		try{
+			var result = {};
+			if(req.headers.host.split('.')[0].indexOf('m')!=-1)		
+				result["METHOD"] = req.method;
+			if(req.headers.host.split('.')[0].indexOf('p')!=-1)		
+				result["PATH"] = req.getPath();
+			if(req.headers.host.split('.')[0].indexOf('h')!=-1)		
+				result["HEADER"] = req.headers;
+			if(req.headers.host.split('.')[0].indexOf('q')!=-1)		
+				result["QUERY"] = req.query;
+			if(req.headers.host.split('.')[0].indexOf('b')!=-1)		
+				result["BODY"] = req.body;
+			sendTelegram(
+				req.headers.host.split('.')[1],
 				JSON.stringify(
 					result,
 					null,
