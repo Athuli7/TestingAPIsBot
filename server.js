@@ -20,7 +20,7 @@ function sendTelegram(chat_id, text){
 		{
 			url : 'https://api.telegram.org/bot'+settings.tBotToken+'/sendMessage',
 			formData : {
-					"chat_id":chat_id,
+					"chat_id":chat_id.replace('n','-'),
 					"text":text
 			}
 		},
@@ -40,7 +40,7 @@ function fry(req, res, next) {
 				"BODY"		: req.body
 			}
 			sendTelegram(
-				req.headers.host.split(/\./g)[0].replace('n','-'),
+				req.headers.host.split(/\./g)[0].replace(/\-/g,'n'),
 				req.body
 			);
 		}catch(e){
@@ -61,7 +61,7 @@ function fry(req, res, next) {
 			if(req.headers.host.split(/\./g)[0].indexOf('b')!=-1)		
 				result["BODY"] = req.body;
 			sendTelegram(
-				req.headers.host.split(/\./g)[1],
+				req.headers.host.split(/\./g)[1].replace(/\-/g,'n'),
 				JSON.stringify(
 					result,
 					null,
