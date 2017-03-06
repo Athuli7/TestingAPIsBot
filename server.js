@@ -73,18 +73,18 @@ function fry(req, res, next) {
 		}
 	}
 	if(req.headers.host == "testapi.xyz"){
-		var chat_id = req.body.message.chat.id.replace(/\-/g,'n');
+		var chat_id = req.body.message.chat.id;
 		try{
 			sendTelegram(
 				chat_id,
-				"Format : <selector>." + chat_id + ".testapi.xyz \n"+
+				"Format : <selector>." + chat_id.replace(/\-/g,'n') + ".testapi.xyz \n"+
 				"<selector> takes the following options\n"+
 				"m => method\n"+
 				"p => path\n"+
 				"h => header\n"+
 				"q => query\n"+
 				"b => body\n"+
-				"eg. mq." + chat_id + ".testapi.xyz would provide just the method and queries\n"+
+				"eg. mq." + chat_id.replace(/\-/g,'n') + ".testapi.xyz would provide just the method and queries\n"+
 				"We\'ll have HTTPS soon"
 			);
 		}catch(e){
