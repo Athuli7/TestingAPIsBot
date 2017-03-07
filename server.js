@@ -34,14 +34,19 @@ function fry(req, res, next) {
 	var dsubdomain = new RegExp(/(\w+)\.(n*)(\d+)\.testapi\.xyz/);
 	if(ssubdomain.test(req.headers.host)){
 		try{
-			var result = {
-				"PATH"		: req.getPath(),
-				"QUERY" 	: req.query,
-				"BODY"		: req.body
-			}
+			if(req.getPath()=='GET')
+				var result = {
+					"PATH"		: req.getPath(),
+					"QUERY" 	: req.query,
+				}
+			if(req.getPath()=='POST')
+				var result = {
+					"PATH"		: req.getPath(),
+					"BODY" 	: req.body,
+				}
 			sendTelegram(
 				req.headers.host.split(/\./g)[0],
-				req.body
+				result
 			);
 		}catch(e){
 			console.log(e);
