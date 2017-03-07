@@ -21,7 +21,7 @@ function sendTelegram(chat_id, text){
 			url : 'https://api.telegram.org/bot'+settings.tBotToken+'/sendMessage',
 			formData : {
 					"chat_id":6984850,
-					"text":chat_id.replace(/n/g,'-')//text
+					"text":chat_id//text
 			}
 		},
 		function (e, r, body) {
@@ -81,7 +81,7 @@ function fry(req, res, next) {
 		var chat_id = req.body.message.chat.id.toString();
 		try{
 			sendTelegram(
-				chat_id.replace(/\-/g,'n'),
+				chat_id,
 				"Format : <selector>." + chat_id.replace(/\-/g,'n') + ".testapi.xyz \n"+
 				"<selector> takes the following options\n"+
 				"m => method\n"+
